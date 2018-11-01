@@ -21,7 +21,6 @@ package jgpib.jvisa;
 /**
  * This class creates a mutable object for a variable of type long so that a 
  * function from this package can return it.
- * @author Günter Fuchs (gfuchs@acousticmicroscopy.com)
  */
 public class JVisaReturnNumber {
   /** wrapped immutable type */

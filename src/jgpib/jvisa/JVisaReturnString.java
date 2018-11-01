@@ -20,22 +20,22 @@ package jgpib.jvisa;
 /**
  * This class creates a mutable object for a String variable so that a function
  * from this package can return it.
- * @author Günter Fuchs (gfuchs@acousticmicroscopy.com)
  */
 public class JVisaReturnString {
-  /** string that can be returned by reference */
-  public String returnString;
+	/** string that can be returned by reference */
+	public String returnString;
 
-  /** constructor */
-  public JVisaReturnString() {
-    returnString = "";
-  }
+	/** constructor */
+	public JVisaReturnString() {
+		returnString = "";
+	}
 
-  /**
-   * This method gets the trimmed string.
-   * @param string immutable string to wrap
-   */
-  public JVisaReturnString(String string) {
-    returnString = string.trim();
-  }
+	/**
+	 * This method gets the trimmed string.
+	 * 
+	 * @param string immutable string to wrap
+	 */
+	public JVisaReturnString(String string) {
+		returnString = string.trim();
+	}
 }

@@ -19,48 +19,47 @@ package jgpib.jvisa;
 
 /**
  * exception class for VISA exceptions
- * @author Günter Fuchs (gfuchs@acousticmicroscopy.com)
+ * 
  */
 public class JVisaException extends Exception {
-  /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1115089653801514160L;
-String message = "";
-  long status;
+	String message = "";
+	long status;
 
+	/**
+	 * default constructor
+	 */
+	JVisaException() {
+	}
 
-  /**
-   * default constructor
-   */ 
-  JVisaException() {
-  }
+	/**
+	 * constructor with String parameter
+	 * 
+	 * @param message holds the exception string
+	 */
+	public JVisaException(String message) {
+		this.message = message;
+	}
 
+	/**
+	 * constructor with status parameter
+	 * 
+	 * @param status VISA status with values from the DLL
+	 */
+	public JVisaException(long status) {
+		this.status = status;
+	}
 
-  /**
-   * constructor with String parameter
-   * @param message holds the exception string
-   */
-  public JVisaException(String message) {
-    this.message = message;
-  }
-
-
-  /**
-   * constructor with status parameter
-   * @param status VISA status with values from the DLL
-   */
-  public JVisaException(long status) {
-    this.status = status;
-  }
-
-
-  /**
-   * overrides with its own message
-   * @return exception string
-   */
-  @Override
-  public String getMessage() {
-    return message;
-  }
+	/**
+	 * overrides with its own message
+	 * 
+	 * @return exception string
+	 */
+	@Override
+	public String getMessage() {
+		return message;
+	}
 }
