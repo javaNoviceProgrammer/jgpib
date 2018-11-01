@@ -1,5 +1,5 @@
 package jgpib.instruments;
 
-public interface TunableLaser {
+public interface Laser {
 
 }

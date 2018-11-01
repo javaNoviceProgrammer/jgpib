@@ -1,0 +1,8 @@
+Nov 01, 2018 4:17:36 PM jgpib.jvisa.JVisa <init>
+INFO: Unable to load library 'tkVisa64.dll': Native library (win32-x86-64/tkVisa64.dll) not found in resource path ([file:/C:/Users/ilirm/Desktop/java_projects/jgpib/bin/, file:/C:/Users/ilirm/Desktop/java_projects/jgpib/lib/JnaVisa64_13.jar])
+Nov 01, 2018 4:17:36 PM jgpib.jvisa.JVisa <init>
+INFO: Success loading nivisa64.dll.
+Nov 01, 2018 4:17:36 PM jgpib.jvisa.JVisaStatus printStatusDescription
+SEVERE: viStatus = 0xFFFFFFFFBFFF000E
+Nov 01, 2018 4:17:36 PM jgpib.jvisa.JVisa openInstrument
+SEVERE: Could not open session for GPIB0::1::INSTR.
