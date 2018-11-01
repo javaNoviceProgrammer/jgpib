@@ -98,6 +98,7 @@ public class MultiMeterGUI extends JPanel {
 		MultiMeterGUI gui = new MultiMeterGUI() ;
 		frame.getContentPane().add(gui) ;
 		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	
