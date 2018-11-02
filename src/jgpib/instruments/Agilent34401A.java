@@ -1,5 +1,5 @@
 package jgpib.instruments;
 
-public interface Voltmeter {
+public class Agilent34401A {
 
 }
