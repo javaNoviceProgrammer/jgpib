@@ -2,10 +2,11 @@ package jgpib.instruments;
 
 import java.util.Map;
 
-public class Agilent34401A extends AbstractInstrument {
+public class Agilent34465A extends AbstractInstrument {
 
-	public Agilent34401A(int busNumber, int address) {
+	public Agilent34465A(int busNumber, int address) {
 		super(busNumber, address);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

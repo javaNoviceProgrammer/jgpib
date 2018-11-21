@@ -47,7 +47,6 @@ import visatype.VisatypeLibrary;
 
 /**
  * This class provides Java wrapper functions around the native Windows VISA API.
- * @author Günter Fuchs (gfuchs@acousticmicroscopy.com)
  * todo Test instantiating more than one instrument.
  * todo Throw exception instead of returning status.
  */

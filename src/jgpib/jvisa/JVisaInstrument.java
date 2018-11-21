@@ -23,7 +23,6 @@ import visatype.VisatypeLibrary;
 
 /**
  * This class provides basic Visa instrument handling.
- * @author Günter Fuchs (gfuchs@acousticmicroscopy.com)
 */
 public class JVisaInstrument extends JVisa {
   /** return status of VISA functions */
