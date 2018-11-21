@@ -66,6 +66,18 @@ public class Console extends JFrame {
 		menuBar.add(mnFile);
 		
 		mntmRun = new JMenuItem("Run...");
+		mntmRun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						Laboratory.main(null);
+						
+					}
+				});
+			}
+		});
 		mntmRun.setIcon(new ImageIcon(Console.class.getResource("/com/sun/java/swing/plaf/windows/icons/HardDrive.gif")));
 		mnFile.add(mntmRun);
 		
