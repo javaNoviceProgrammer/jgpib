@@ -1,18 +1,35 @@
 package jgpib.instruments;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import ch.epfl.general_libraries.clazzes.ParamName;
 
 public class Agilent34465A extends AbstractInstrument {
 
-	public Agilent34465A(int busNumber, int address) {
+	public Agilent34465A(
+			@ParamName(name="GPIB bus number") int busNumber, 
+			@ParamName(name="GPIB address") int address) {
 		super(busNumber, address);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Map<String, String> getAllParameters() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> map = new HashMap<>() ;
+		map.put("name", getName()) ;
+		map.put("address", fullAddress) ;
+		return map ;
+	}
+
+	@Override
+	public String getName() {
+		return "Agilent34465A" + "," + fullAddress ;
+	}
+
+	@Override
+	public String getModel() {
+		return "Agilent34465A";
 	}
 
 }

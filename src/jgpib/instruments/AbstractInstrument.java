@@ -15,9 +15,9 @@ public abstract class AbstractInstrument {
 	JVisaInstrument visa ;
 	JVisaReturnString response ;
 	
-	String fullAddress ;
 	int address ;
 	int busNumber ;
+	String fullAddress ;
 	
 	public abstract Map<String, String> getAllParameters() ;
 	
@@ -32,6 +32,9 @@ public abstract class AbstractInstrument {
 		response = new JVisaReturnString() ;
 		visa.openDefaultResourceManager() ;
 	}
+	
+	public abstract String getName() ;
+	public abstract String getModel() ;
 	
 	public int getAddress() {
 		return address ;
@@ -50,7 +53,18 @@ public abstract class AbstractInstrument {
 		} catch (JVisaException e) {
 			e.printStackTrace();
 		}
-		return response.returnString ;
+		String[] st = response.returnString.split(",") ;
+		String identifier = st[0] + " , " + st[1] ;
+		return identifier ;
+	}
+	
+	public void reset() {
+		visa.openInstrument(fullAddress) ;
+		try {
+			visa.sendAndReceive("*RST", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
