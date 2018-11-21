@@ -2,7 +2,9 @@ package jgpib.instruments;
 
 import java.util.Map;
 
+import jgpib.jvisa.JVisaException;
 import jgpib.jvisa.JVisaInstrument;
+import jgpib.jvisa.JVisaReturnString;
 
 public abstract class AbstractInstrument {
 	
@@ -11,6 +13,7 @@ public abstract class AbstractInstrument {
 	 */
 
 	JVisaInstrument visa ;
+	JVisaReturnString response ;
 	
 	String fullAddress ;
 	int address ;
@@ -25,6 +28,9 @@ public abstract class AbstractInstrument {
 		this.busNumber = busNumber ;
 		this.address = address ;
 		this.fullAddress = "GPIB"+busNumber+"::"+address+"::INSTR" ;
+		visa = new JVisaInstrument() ;
+		response = new JVisaReturnString() ;
+		visa.openDefaultResourceManager() ;
 	}
 	
 	public int getAddress() {
@@ -38,9 +44,13 @@ public abstract class AbstractInstrument {
 	// common GPIB commands
 	
 	public String identify() {
-		visa.openDefaultResourceManager() ;
 		visa.openInstrument(fullAddress) ;
-		return null ;
+		try {
+			visa.sendAndReceive("*IDN?", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		return response.returnString ;
 	}
 	
 	
