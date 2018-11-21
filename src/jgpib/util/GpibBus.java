@@ -1,4 +1,4 @@
-package jgpib.instruments;
+package jgpib.util;
 
 import jgpib.jvisa.JVisaInstrument;
 import jgpib.jvisa.JVisaReturnString;
@@ -17,7 +17,7 @@ public class GpibBus {
 					visa.openInstrument(fullAddress) ;
 					JVisaReturnString response = new JVisaReturnString() ;
 					visa.sendAndReceive("*IDN?", response) ;
-					sb.append(fullAddress + "-->" + response.returnString) ;
+					sb.append(fullAddress + "-->" + response.returnString + "\n") ;
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
