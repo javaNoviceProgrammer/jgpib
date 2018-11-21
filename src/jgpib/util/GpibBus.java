@@ -22,7 +22,9 @@ public class GpibBus {
 					visa.openInstrument(fullAddress) ;
 					JVisaReturnString response = new JVisaReturnString() ;
 					visa.sendAndReceive("*IDN?", response) ;
-					sb.append(fullAddress + "-->" + response.returnString + "\n") ;
+					String[] st = response.returnString.split(",") ;
+					String identifier = st[0] + " , " + st[1] ;
+					sb.append(fullAddress + "-->" + identifier + "\n") ;
 				} catch (Exception e) {
 				}
 			}
