@@ -21,8 +21,6 @@ public class GpibBus {
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-				
-				
 			}
 		return sb.toString() ;
 	}
