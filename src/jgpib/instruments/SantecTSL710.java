@@ -14,11 +14,6 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 	double powermW, powerdBm, powerRaw ;
 	PowerUnit unit ;
 	
-	public enum PowerUnit {
-		dBm,
-		mW
-	}
-	
 	public SantecTSL710(
 			@ParamName(name="GPIB bus number") int busNumber, 
 			@ParamName(name="GPIB address") int address,
@@ -149,6 +144,21 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 	public void trigger() {
 		setPower(this.powerRaw, this.unit);
 		setWavelength(this.lambdaNm);
+	}
+
+	@Override
+	public double getWavelength() {
+		return this.lambdaMinNm ;
+	}
+
+	@Override
+	public double getPowermW() {
+		return this.powermW ;
+	}
+
+	@Override
+	public double getPowerdBm() {
+		return this.powerdBm ;
 	}
 	
 	
