@@ -1,2 +1,0 @@
-Nov 23, 2018 2:24:15 PM jgpib.jvisa.JVisa <init>
-INFO: Success loading undefined.
