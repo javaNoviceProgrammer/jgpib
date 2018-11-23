@@ -54,7 +54,6 @@ public class Console extends JFrame {
 	 */
 	public Console() {
 		setTitle("GPIB Controller V1.0");
-		setAlwaysOnTop(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Console.class.getResource("/com/sun/javafx/scene/web/skin/Paste_16x16_JFX.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 613, 323);

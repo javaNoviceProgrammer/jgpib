@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ch.epfl.general_libraries.clazzes.ParamName;
+import jgpib.instruments.intf.MultiMeter;
 
-public class Agilent34401A extends AbstractInstrument {
+public class Agilent34401A extends AbstractInstrument implements MultiMeter {
 
 	public Agilent34401A(
 			@ParamName(name="GPIB bus number") int busNumber, 
@@ -29,6 +30,11 @@ public class Agilent34401A extends AbstractInstrument {
 	@Override
 	public String getModel() {
 		return "Agilent34401A";
+	}
+
+	@Override
+	public String getIdentifier() {
+		return "Measurement, digital mlutimeter";
 	}
 
 }

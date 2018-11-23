@@ -1,5 +1,7 @@
 package jgpib.gui;
 
+import java.util.ArrayList;
+
 import ch.epfl.general_libraries.clazzes.ParamName;
 import ch.epfl.general_libraries.experiment_aut.Experiment;
 import ch.epfl.general_libraries.experiment_aut.WrongExperimentException;
@@ -8,15 +10,25 @@ import ch.epfl.general_libraries.results.AbstractResultsManager;
 import ch.epfl.general_libraries.results.DataPoint;
 import ch.epfl.javancox.experiments.builder.ExperimentConfigurationCockpit;
 import jgpib.instruments.AbstractInstrument;
+import jgpib.instruments.intf.Laser;
+import jgpib.instruments.intf.MultiMeter;
+import jgpib.instruments.intf.VoltageSource;
 
 public class Laboratory implements Experiment {
 
 	AbstractInstrument[] instruments ;
+	ArrayList<Laser> lasers ;
+	ArrayList<VoltageSource> voltageSources ;
+	ArrayList<MultiMeter> multiMeters ;
 	
 	public Laboratory(
-			@ParamName(name="Select Lab Equipment") AbstractInstrument[] instruments
+			@ParamName(name="Lasers") Laser[] lasers,
+			@ParamName(name="Voltage Sources") VoltageSource[] vs,
+			@ParamName(name="Digital Multi Meters") MultiMeter[] dmm
 			) {
-		this.instruments = instruments ;
+		
+				
+		// then setup the measuring equipment (multimeter, powermeter, ...)
 	}
 	
 	@Override

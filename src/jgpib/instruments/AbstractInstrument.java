@@ -35,6 +35,7 @@ public abstract class AbstractInstrument {
 	
 	public abstract String getName() ;
 	public abstract String getModel() ;
+	public abstract String getIdentifier() ;
 	
 	public int getAddress() {
 		return address ;
