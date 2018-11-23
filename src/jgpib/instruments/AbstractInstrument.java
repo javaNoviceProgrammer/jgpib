@@ -31,6 +31,7 @@ public abstract class AbstractInstrument {
 		visa = new JVisaInstrument() ;
 		response = new JVisaReturnString() ;
 		visa.openDefaultResourceManager() ;
+		visa.openInstrument(fullAddress) ;
 	}
 	
 	public abstract String getName() ;
@@ -48,7 +49,6 @@ public abstract class AbstractInstrument {
 	// common GPIB commands
 	
 	public String identify() {
-		visa.openInstrument(fullAddress) ;
 		try {
 			visa.sendAndReceive("*IDN?", response) ;
 		} catch (JVisaException e) {
@@ -60,13 +60,26 @@ public abstract class AbstractInstrument {
 	}
 	
 	public void reset() {
-		visa.openInstrument(fullAddress) ;
 		try {
 			visa.sendAndReceive("*RST", response) ;
 		} catch (JVisaException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean selfTest() {
+		try {
+			visa.sendAndReceive("*TST?", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		if(response.returnString == "0")
+			return true ; // success
+		else
+			return false ; // failure
+	}
+	
+	
 	
 	
 }

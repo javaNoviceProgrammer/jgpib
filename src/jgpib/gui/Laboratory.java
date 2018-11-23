@@ -9,24 +9,26 @@ import ch.epfl.general_libraries.results.AbstractResultsDisplayer;
 import ch.epfl.general_libraries.results.AbstractResultsManager;
 import ch.epfl.general_libraries.results.DataPoint;
 import ch.epfl.javancox.experiments.builder.ExperimentConfigurationCockpit;
-import jgpib.instruments.AbstractInstrument;
-import jgpib.instruments.intf.Laser;
+import jgpib.instruments.intf.BroadbandLaser;
 import jgpib.instruments.intf.MultiMeter;
+import jgpib.instruments.intf.TunableLaser;
 import jgpib.instruments.intf.VoltageSource;
 
 public class Laboratory implements Experiment {
 
-	AbstractInstrument[] instruments ;
-	ArrayList<Laser> lasers ;
+	ArrayList<TunableLaser> lasers ;
 	ArrayList<VoltageSource> voltageSources ;
 	ArrayList<MultiMeter> multiMeters ;
 	
 	public Laboratory(
-			@ParamName(name="Lasers") Laser[] lasers,
+			@ParamName(name="Tunable Lasers") TunableLaser[] tuneLasers,
+			@ParamName(name="Broadband Lasers") BroadbandLaser[] bbLasers,
 			@ParamName(name="Voltage Sources") VoltageSource[] vs,
 			@ParamName(name="Digital Multi Meters") MultiMeter[] dmm
 			) {
+		// set up optical sources
 		
+		// set up electrical sources
 				
 		// then setup the measuring equipment (multimeter, powermeter, ...)
 	}

@@ -1,6 +1,6 @@
 package jgpib.instruments.intf;
 
-public interface Laser {
+public interface BroadbandLaser {
 	
 	void setup() ;
 

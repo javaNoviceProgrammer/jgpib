@@ -26,7 +26,6 @@ import visatype.VisatypeLibrary;
 
 /**
  * This class provides routines related to ViStatus declared in visa.h.
- * @author Günter Fuchs (gfuchs@acousticmicroscopy.com)
  */
 public class JVisaStatus {
   /** VISA status as NativeLong. 

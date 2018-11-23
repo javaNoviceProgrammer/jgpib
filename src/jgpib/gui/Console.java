@@ -1,23 +1,24 @@
 package jgpib.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import jgpib.util.GpibBus;
 import jgpib.util.Log;
-
-import java.awt.Toolkit;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Console extends JFrame {
 
@@ -32,6 +33,8 @@ public class Console extends JFrame {
 	private JMenu mnFile;
 	private JMenu mnConsole;
 	private JPanel contentPane;
+	private JSeparator separator;
+	private JMenuItem mntmNewMenuItem;
 
 	/**
 	 * Launch the application.
@@ -53,6 +56,21 @@ public class Console extends JFrame {
 	 * Create the frame.
 	 */
 	public Console() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setTitle("GPIB Controller V1.0");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Console.class.getResource("/com/sun/javafx/scene/web/skin/Paste_16x16_JFX.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,7 +95,6 @@ public class Console extends JFrame {
 				});
 			}
 		});
-		mntmRun.setIcon(new ImageIcon(Console.class.getResource("/com/sun/java/swing/plaf/windows/icons/HardDrive.gif")));
 		mnFile.add(mntmRun);
 		
 		mnConsole = new JMenu("Console");
@@ -91,6 +108,12 @@ public class Console extends JFrame {
 			}
 		});
 		mnConsole.add(printBus);
+		
+		separator = new JSeparator();
+		mnConsole.add(separator);
+		
+		mntmNewMenuItem = new JMenuItem("Log Path...");
+		mnConsole.add(mntmNewMenuItem);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

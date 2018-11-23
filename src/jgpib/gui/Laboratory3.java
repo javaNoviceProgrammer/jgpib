@@ -10,14 +10,14 @@ import ch.epfl.general_libraries.results.AbstractResultsManager;
 import ch.epfl.general_libraries.results.DataPoint;
 import ch.epfl.javancox.experiments.builder.ExperimentConfigurationCockpit;
 import jgpib.instruments.AbstractInstrument;
-import jgpib.instruments.intf.Laser;
+import jgpib.instruments.intf.BroadbandLaser;
 import jgpib.instruments.intf.MultiMeter;
 import jgpib.instruments.intf.VoltageSource;
 
 public class Laboratory3 implements Experiment {
 
 	AbstractInstrument[] instruments ;
-	ArrayList<Laser> lasers ;
+	ArrayList<BroadbandLaser> lasers ;
 	ArrayList<VoltageSource> voltageSources ;
 	ArrayList<MultiMeter> multiMeters ;
 	
@@ -29,8 +29,8 @@ public class Laboratory3 implements Experiment {
 		int n = instruments.length ;
 		for(int i=0; i<n; i++)
 			if(instruments[i].getIdentifier().contains("Laser")) {
-				((Laser) instruments[i]).setup() ;
-				lasers.add((Laser) instruments[i]) ;
+				((BroadbandLaser) instruments[i]).setup() ;
+				lasers.add((BroadbandLaser) instruments[i]) ;
 			}
 				
 		// then setup the measuring equipment (multimeter, powermeter, ...)
