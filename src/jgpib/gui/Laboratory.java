@@ -15,23 +15,21 @@ import jgpib.instruments.intf.VoltageSource;
 
 public class Laboratory implements Experiment {
 
-	TunableLaser[] tuneLasers ;
-	VoltageSource[] voltageSources ;
-	MultiMeter[] multiMeters ;
+	TunableLaser tuneLasers ;
+	VoltageSource voltageSources ;
+	MultiMeter multiMeters ;
 	
 	public Laboratory(
-			@ParamName(name="Tunable Lasers") TunableLaser[] tuneLasers,
-			@ParamName(name="Broadband Lasers") BroadbandLaser[] bbLasers,
-			@ParamName(name="Voltage Sources") VoltageSource[] vs,
-			@ParamName(name="Digital Multi Meters") MultiMeter[] dmm
+			@ParamName(name="Tunable Lasers") TunableLaser tuneLasers,
+			@ParamName(name="Broadband Lasers") BroadbandLaser bbLasers,
+			@ParamName(name="Voltage Sources") VoltageSource vs,
+			@ParamName(name="Digital Multi Meters") MultiMeter dmm
 			) {
 		this.voltageSources = vs ;
 		this.multiMeters = dmm ;
 		// trigger optical sources
 		if(tuneLasers != null) {
 			this.tuneLasers = tuneLasers ;
-			for(TunableLaser tl : tuneLasers)
-				tl.trigger(); 
 		}
 		// set up electrical sources
 				
@@ -45,11 +43,9 @@ public class Laboratory implements Experiment {
 	public void run(AbstractResultsManager man, AbstractResultsDisplayer dis) throws WrongExperimentException {
 		DataPoint dp = new DataPoint() ;
 		if(tuneLasers != null)
-			for(TunableLaser tl : tuneLasers)
-				dp.addProperties(((AbstractInstrument) tl).getAllParameters());
+			dp.addProperties(((AbstractInstrument) tuneLasers).getAllParameters());
 		if(this.multiMeters != null) {
-			for(MultiMeter dmm : multiMeters)
-				dp.addResultProperties(((AbstractInstrument) dmm).getAllParameters());
+			dp.addResultProperties(((AbstractInstrument) multiMeters).getAllParameters());
 		}
 		man.addDataPoint(dp);
 	}
