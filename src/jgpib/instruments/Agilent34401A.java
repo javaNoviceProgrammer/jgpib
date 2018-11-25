@@ -9,7 +9,8 @@ import jgpib.jvisa.JVisaException;
 
 public class Agilent34401A extends AbstractInstrument implements MultiMeter {
 
-	double voltageRes, voltageMax ;
+	double voltageRes = 1e-4 ;
+	double voltageMax = 10.0 ;
 	
 	public Agilent34401A(
 			@ParamName(name="GPIB bus number") int busNumber, 
