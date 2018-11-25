@@ -44,6 +44,7 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 		default:
 			break;
 		}
+		trigger();
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 	public void setWavelength(double lambdaNm) {
 		this.lambdaNm = lambdaNm ;
 		try {
-			visa.sendAndReceive("WAV " + lambdaNm, response) ;
+			visa.write("WAV " + lambdaNm) ;
 		} catch (JVisaException e) {
 			e.printStackTrace();
 		}
@@ -73,12 +74,12 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 			this.powerdBm = power ;
 			this.powermW = Math.pow(10.0, power/10.0) ;
 			try {
-				visa.sendAndReceive(":POW:UNIT " + 0, response) ;
+				visa.write(":POW:UNIT " + 0) ;
 			} catch (JVisaException e) {
 				e.printStackTrace();
 			}
 			try {
-				visa.sendAndReceive(":POW:LEV " + power, response) ;
+				visa.write(":POW:LEV " + power) ;
 			} catch (JVisaException e) {
 				e.printStackTrace();
 			}
@@ -87,12 +88,12 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 			this.powermW = power ;
 			this.powerdBm = 10.0*Math.log10(power) ;
 			try {
-				visa.sendAndReceive(":POW:UNIT " + 1, response) ;
+				visa.write(":POW:UNIT " + 1) ;
 			} catch (JVisaException e) {
 				e.printStackTrace();
 			}
 			try {
-				visa.sendAndReceive(":POW:LEV " + power, response) ;
+				visa.write(":POW:LEV " + power) ;
 			} catch (JVisaException e) {
 				e.printStackTrace();
 			}
@@ -148,7 +149,7 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 
 	@Override
 	public double getWavelength() {
-		return this.lambdaMinNm ;
+		return this.lambdaNm ;
 	}
 
 	@Override

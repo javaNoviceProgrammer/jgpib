@@ -7,12 +7,15 @@ import jgpib.jvisa.JVisaInstrument;
 import jgpib.jvisa.JVisaReturnString;
 
 public abstract class AbstractInstrument {
-	
-	/*
-	 * setting up the general GPIB commands here
-	 */
 
-	JVisaInstrument visa ;
+	/*
+	 * define visa session as static to avoid creating multiple sessions
+	 */
+	
+	static JVisaInstrument visa ;
+	/*
+	 * visa response can be local, no need to define it as static
+	 */
 	JVisaReturnString response ;
 	
 	int address ;
@@ -29,9 +32,9 @@ public abstract class AbstractInstrument {
 		this.address = address ;
 		this.fullAddress = "GPIB"+busNumber+"::"+address+"::INSTR" ;
 		visa = new JVisaInstrument() ;
-		response = new JVisaReturnString() ;
 		visa.openDefaultResourceManager() ;
 		visa.openInstrument(fullAddress) ;
+		response = new JVisaReturnString() ;
 	}
 	
 	public abstract String getName() ;
