@@ -51,6 +51,11 @@ public abstract class AbstractInstrument {
 	
 	// common GPIB commands
 	
+	/**
+	 * identification query
+	 * @return
+	 */
+	
 	public String identify() {
 		try {
 			visa.sendAndReceive("*IDN?", response) ;
@@ -62,27 +67,161 @@ public abstract class AbstractInstrument {
 		return identifier ;
 	}
 	
+	/**
+	 * devise reset
+	 */
+	
 	public void reset() {
 		try {
-			visa.sendAndReceive("*RST", response) ;
+			visa.write("*RST") ;
 		} catch (JVisaException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public boolean selfTest() {
+	/**
+	 * self-test query
+	 * @return
+	 */
+	
+	public boolean isOK() {
 		try {
 			visa.sendAndReceive("*TST?", response) ;
 		} catch (JVisaException e) {
 			e.printStackTrace();
 		}
-		if(response.returnString == "0")
+		String st = response.returnString ;
+		if(st.equals("0"))
 			return true ; // success
 		else
 			return false ; // failure
 	}
 	
+	/**
+	 * operation complete query
+	 * @return
+	 * 0 (in operation) or 1 (operation completed)
+	 */
 	
+	public boolean operationCompleted() {
+		try {
+			visa.sendAndReceive("*OPC?", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String st = response.returnString ;
+		if(st.equals("0"))
+			return false ;
+		else
+			return true ;
+	}
+	
+	/**
+	 * clear status
+	 */
+	
+	public void clearStat() {
+		try {
+			visa.write("*CLS") ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Standard event enable register setting
+	 * @param value 
+	 * 8 bit register value
+	 */
+	
+	public void setEventEnableRegister(byte value) {
+		String command = "*ESE " + value ;
+		try {
+			visa.write(command) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * query standard event enable register
+	 * @return
+	 * a byte (8 bits) as the SEER
+	 */
+	
+	public byte getEventEnableRegister() {
+		try {
+			visa.sendAndReceive("*ESE?", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String result = response.returnString ;
+		return Byte.parseByte(result) ;
+	}
+	
+	/**
+	 * places the value of the standard event status register (SESR)
+	 * in the output queue. Register is cleared after being read.
+	 * @return
+	 * a byte (8 bits) as the SESR
+	 */
+	
+	public byte getEventStatusRegister() {
+		try {
+			visa.sendAndReceive("*ESR?", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String result = response.returnString ;
+		return Byte.parseByte(result) ;
+	}
+	
+	/**
+	 * service request enable register setting
+	 * @param value
+	 * a byte (8 bits)
+	 */
+	
+	public void setServiceRequestEnable(byte value) {
+		String command = "*SRE " + value ;
+		try {
+			visa.write(command) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * service request enable register query
+	 * @return
+	 * a byte (8 bit) as SRER
+	 */
+	
+	public byte getServiceRequestEnable() {
+		try {
+			visa.sendAndReceive("*SRE?", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String result = response.returnString ;
+		return Byte.parseByte(result) ;
+	}
+	
+	/**
+	 * places the value of the status byte register (STBR) in the output query
+	 * @return
+	 * a byte (8 bits) as STBR
+	 */
+	
+	public byte getStatusByte() {
+		try {
+			visa.sendAndReceive("*STB?", response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String result = response.returnString ;
+		return Byte.parseByte(result) ;
+	}
 	
 	
 }
