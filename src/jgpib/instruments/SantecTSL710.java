@@ -102,6 +102,28 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 			break;
 		}
 	}
+	
+	public void setPowerUnit(PowerUnit unit) {
+		this.unit = unit ;
+		switch (unit) {
+		case dBm:
+			try {
+				visa.write(":POW:UNIT " + 0) ;
+			} catch (JVisaException e) {
+				e.printStackTrace();
+			}
+			break;
+		case mW:
+			try {
+				visa.write(":POW:UNIT " + 1) ;
+			} catch (JVisaException e) {
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
+		}
+	}
 
 	@Override
 	public String getName() {
@@ -149,17 +171,131 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 
 	@Override
 	public double getWavelength() {
+		String command = "WAV?" ;
+		try {
+			visa.sendAndReceive(command, response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		this.lambdaNm = Double.parseDouble(response.returnString) ;
 		return this.lambdaNm ;
 	}
 
 	@Override
 	public double getPowermW() {
+		String command = "" ;
 		return this.powermW ;
 	}
 
 	@Override
 	public double getPowerdBm() {
 		return this.powerdBm ;
+	}
+	
+	/*
+	 * Commands for Santec TSL 710 
+	 */
+	
+	public void reboot() {
+		String command = ":SPEC:REB" ;
+		try {
+			visa.write(command) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String getErrorNumber() {
+		String command = ":SYS:ERR?" ;
+		try {
+			visa.sendAndReceive(command, response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		return response.returnString ;
+	}
+	
+	public String getFirmWareVersion() {
+		String command = ":SYST:VERS?" ;
+		try {
+			visa.sendAndReceive(command, response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String result = response.returnString ;
+		return result ;
+	}
+	
+	public void setGpibAddress(int address) {
+		if(address < 0 || address > 30)
+			throw new IllegalArgumentException("address must be between 1 and 30") ;
+		this.address = address ;
+		this.fullAddress = getfullAddress() ;
+		String command = ":SYST:COMM:GPIB:ADDR " + address ;
+		try {
+			visa.write(command) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int readGpibAddress() {
+		String command = ":SYST:COMM:GPIB:ADDR?" ;
+		try {
+			visa.sendAndReceive(command, response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String result = response.returnString ;
+		this.address = Integer.parseInt(result) ;
+		this.fullAddress = getfullAddress() ;
+		return this.address ;
+	}
+	
+	public enum Delim {
+		CR,
+		LF,
+		CR_LF,
+		NONE
+	}
+	
+	public void setGpibDelimiter(Delim delim) {
+		int value = 0 ;
+		switch (delim) {
+		case CR:
+			value = 0 ;
+			break;
+		case LF:
+			value = 1 ;
+			break ;
+		case CR_LF:
+			value = 2 ;
+			break ;
+		default:
+			value = 3 ;
+			break;
+		}
+		String command = ":SYST:COMM:GPIB:DEL " + value ;
+		try {
+			visa.write(command) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getGpibDelimiter() {
+		String command = ":SYST:COMM:GPIB:DEL?" ;
+		try {
+			visa.sendAndReceive(command, response) ;
+		} catch (JVisaException e) {
+			e.printStackTrace();
+		}
+		String result = response.returnString ;
+		return Integer.parseInt(result) ;
+	}
+	
+	public void setGpibSpeed(int value) {
+		
 	}
 	
 	

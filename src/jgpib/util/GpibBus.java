@@ -18,7 +18,7 @@ public class GpibBus {
 	public String printBus() {
 		sb.append("Scanning all GPIB buses..." + "\n") ;
 		for(int bus=0; bus<10; bus++)
-			for(int address=0; address<100; address++) {
+			for(int address=1; address<31; address++) {
 				String fullAddress = "GPIB"+bus+"::"+address+"::INSTR" ;
 				try {
 					visa.openInstrument(fullAddress) ;

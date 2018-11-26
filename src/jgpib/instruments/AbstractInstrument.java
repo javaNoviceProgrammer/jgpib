@@ -46,6 +46,7 @@ public abstract class AbstractInstrument {
 	}
 	
 	public String getfullAddress() {
+		this.fullAddress = "GPIB" + busNumber + "::" + address + "::INSTR" ;
 		return fullAddress ;
 	}
 	
