@@ -3,7 +3,6 @@ package jgpib.instruments;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.epfl.general_libraries.clazzes.ParamName;
 import jgpib.instruments.intf.MultiMeter;
 import jgpib.jvisa.JVisaException;
 
@@ -13,10 +12,10 @@ public class Agilent34465A extends AbstractInstrument implements MultiMeter {
 	double voltageMax = 10.0 ;
 	
 	public Agilent34465A(
-			@ParamName(name="GPIB bus number") int busNumber, 
-			@ParamName(name="GPIB address") int address,
-			@ParamName(name="Voltage Max (V)") double voltageMax ,
-			@ParamName(name="Voltage resolution (V)") double voltageRes) {
+			int busNumber, 
+			int address,
+			double voltageMax ,
+			double voltageRes) {
 		super(busNumber, address);
 		this.voltageMax = voltageMax ;
 		this.voltageRes = voltageRes ;

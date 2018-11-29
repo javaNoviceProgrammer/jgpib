@@ -3,7 +3,6 @@ package jgpib.instruments;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.epfl.general_libraries.clazzes.ParamName;
 import jgpib.instruments.intf.TunableLaser;
 import jgpib.jvisa.JVisaException;
 
@@ -15,11 +14,11 @@ public class SantecTSL710 extends AbstractInstrument implements TunableLaser {
 	PowerUnit unit ;
 	
 	public SantecTSL710(
-			@ParamName(name="GPIB bus number") int busNumber, 
-			@ParamName(name="GPIB address") int address,
-			@ParamName(name="Wavelength (nm)") double lambdaNm,
-			@ParamName(name="Optical Power") double power,
-			@ParamName(name="Optical Power Unit (dBm, mW)") PowerUnit unit
+			int busNumber, 
+			int address,
+			double lambdaNm,
+			double power,
+			PowerUnit unit
 			) {
 		super(busNumber, address);
 		// making sure input lambda is valid

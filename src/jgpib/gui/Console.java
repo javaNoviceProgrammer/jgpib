@@ -89,7 +89,6 @@ public class Console extends JFrame {
 					
 					@Override
 					public void run() {
-						Laboratory.main(null);
 						
 					}
 				});
